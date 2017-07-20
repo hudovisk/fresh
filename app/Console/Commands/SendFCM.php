@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Advertisement;
+use App\Models\Advertisement;
 use App\Notifications\AdvertisementsNotification;
-use App\User;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class SendFCM extends Command

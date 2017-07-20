@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Advertisement;
+use App\Models\Advertisement;
 use App\Channels\FCMMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
