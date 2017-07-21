@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\JsonResponseHelper;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -44,6 +45,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+//        return JsonResponseHelper::errorResponse($exception->getMessage(), 'general_error', 500, $exception->getTrace());
         return parent::render($request, $exception);
     }
 

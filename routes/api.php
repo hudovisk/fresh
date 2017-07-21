@@ -17,5 +17,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:api')->post('/register', 'AuthController@register');
+//AuthController
+Route::group([], function () {
+
+    //public
+    Route::post('/password/email', 'AuthController@forgotPassword');
+
+    //authenticated
+    Route::group(['middleware' => ['auth:api']], function () {
+        Route::post('/register', 'AuthController@register');
+    });
+});
 

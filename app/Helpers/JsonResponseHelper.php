@@ -29,7 +29,7 @@ class JsonResponseHelper {
         return JsonResponseHelper::dataResponse($message, $data, false, $statusCode);
     }
 
-    public static function errorResponse($message, $error = true, $statusCode = 500, $errorDetails = []) {
+    public static function errorResponse($message, $error = 'general_error', $statusCode = 500, $errorDetails = []) {
         return JsonResponseHelper::dataResponse($message, false, $error, $statusCode, $errorDetails);
     }
 
