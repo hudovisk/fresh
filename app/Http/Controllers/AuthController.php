@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\JsonResponseHelper;
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Services\UserService;
 use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\DB;
@@ -42,6 +43,16 @@ class AuthController extends Controller
             } else {
                 return JsonResponseHelper::errorResponse('Erro ao enviar email');
             }
+        });
+    }
+
+    public function resetPassword(ResetPasswordRequest $request) {
+        return DB::transaction(function () use ($request) {
+            dd('aqui');
+//            $user = $this->userService->create($request->all());
+//
+//            return JsonResponseHelper::successResponse('Usuário criado com sucesso',
+//                fractal($user, new UserTransformer())->toArray(), 201);
         });
     }
 

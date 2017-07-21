@@ -1,0 +1,157 @@
+{
+	"variables": [],
+	"info": {
+		"name": "MyLaravelAPI",
+		"_postman_id": "0f8955b8-e98a-b24d-6d58-87a98d4219d7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "#1 - OAUTH Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"postman.setEnvironmentVariable(\"token\", JSON.parse(responseBody).access_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"hdPvp9uJwSHDgl85935jwFQwUKxPvoR8ai5BX8UY\",\r\n    \"username\": \"admin@admin.com\",\r\n    \"password\": \"admin\",\r\n    \"scope\": \"*\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#2 - Get User ",
+			"request": {
+				"url": "{{url}}/api/user",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"1fjYFYlk0roPkJwhYyB6pEiEe5c2GtAAJc8WkFjy\",\r\n    \"username\": \"admin@admin.com\",\r\n    \"password\": \"admin\",\r\n    \"scope\": \"*\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#3 - Register User",
+			"request": {
+				"url": "{{url}}/api/registe",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Hudo\",\n\t\"email\": \"hudo2@hudo.com\",\n\t\"password\": \"123456\",\n\t\"password_confirmation\": \"123456\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#4 - Forgot password User",
+			"request": {
+				"url": "{{url}}/api/password/email",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"hudo2@hudo.com\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#5 -Reset password",
+			"request": {
+				"url": "{{url}}/api/password/reset",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"hudo2@hudo.com\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
