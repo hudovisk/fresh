@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "MyLaravelAPI",
-		"_postman_id": "0f8955b8-e98a-b24d-6d58-87a98d4219d7",
+		"_postman_id": "63860a3c-d9cb-1be8-ca17-a06182e4230d",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -32,7 +32,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"hdPvp9uJwSHDgl85935jwFQwUKxPvoR8ai5BX8UY\",\r\n    \"username\": \"admin@admin.com\",\r\n    \"password\": \"admin\",\r\n    \"scope\": \"*\"\r\n}"
+					"raw": "{\r\n\t\"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"QRnfJKnuQfB9sUpXHBLRCXlJhYdCwZ5QnTKOup9B\",\r\n    \"username\": \"admin@admin.com\",\r\n    \"password\": \"admin\",\r\n    \"scope\": \"*\"\r\n}"
 				},
 				"description": ""
 			},
@@ -66,7 +66,7 @@
 		{
 			"name": "#3 - Register User",
 			"request": {
-				"url": "{{url}}/api/registe",
+				"url": "{{url}}/api/register",
 				"method": "POST",
 				"header": [
 					{
@@ -100,11 +100,6 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "Authorization",
-						"value": "Bearer {{token}}",
-						"description": ""
-					},
-					{
 						"key": "Accept",
 						"value": "application/json",
 						"description": ""
@@ -126,14 +121,9 @@
 		{
 			"name": "#5 -Reset password",
 			"request": {
-				"url": "{{url}}/api/password/reset",
+				"url": "{{url}}/api/password/reset/",
 				"method": "POST",
 				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{token}}",
-						"description": ""
-					},
 					{
 						"key": "Accept",
 						"value": "application/json",
@@ -147,7 +137,38 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"hudo2@hudo.com\"\n}"
+					"raw": "{\n\t\"email\": \"hudo2@hudo.com\",\n\t\"token\": \"78aac12989548c2ff3fa43b06170c67aaf9cfcab7ba9328dea2ee36437cda1a4\",\n\t\"password\": \"654321\",\n\t\"password_confirmation\": \"654321\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#6 -OAUTH Login user resetado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"postman.setEnvironmentVariable(\"token\", JSON.parse(responseBody).access_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"QRnfJKnuQfB9sUpXHBLRCXlJhYdCwZ5QnTKOup9B\",\r\n    \"username\": \"hudo2@hudo.com\",\r\n    \"password\": \"654321\",\r\n    \"scope\": \"*\"\r\n}"
 				},
 				"description": ""
 			},

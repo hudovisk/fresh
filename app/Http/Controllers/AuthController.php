@@ -10,6 +10,7 @@ use App\Services\UserService;
 use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
+use Mockery\Generator\StringManipulation\Pass\Pass;
 
 class AuthController extends Controller
 {
@@ -38,21 +39,23 @@ class AuthController extends Controller
                 $request->only('email')
             );
 
-            if ($response == Password::RESET_LINK_SENT) {
-                return JsonResponseHelper::successResponse('Email enviado com sucesso');
-            } else {
-                return JsonResponseHelper::errorResponse('Erro ao enviar email');
-            }
+            return $response == Password::RESET_LINK_SENT
+                ? JsonResponseHelper::successResponse('Email enviado com sucesso')
+                : JsonResponseHelper::errorResponse(trans($response));
         });
     }
 
     public function resetPassword(ResetPasswordRequest $request) {
         return DB::transaction(function () use ($request) {
-            dd('aqui');
-//            $user = $this->userService->create($request->all());
-//
-//            return JsonResponseHelper::successResponse('Usuário criado com sucesso',
-//                fractal($user, new UserTransformer())->toArray(), 201);
+            $data = $request->all();
+
+            $response = Password::broker()->reset($data, function ($user, $password) {
+                $this->userService->resetPassword($user, $password);
+            });
+
+            return $response == Password::PASSWORD_RESET
+                ? JsonResponseHelper::successResponse('Senha resetada com sucesso')
+                : JsonResponseHelper::errorResponse(trans($response));
         });
     }
 

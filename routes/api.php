@@ -22,10 +22,12 @@ Route::group([], function () {
 
     //public
     Route::post('/password/email', 'AuthController@forgotPassword');
+    Route::post('/password/reset', 'AuthController@resetPassword');
 
     //authenticated
     Route::group(['middleware' => ['auth:api']], function () {
         Route::post('/register', 'AuthController@register');
+        Route::put('/me', 'AuthController@updateProfile');
     });
 });
 

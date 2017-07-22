@@ -46,7 +46,8 @@ class ResetPasswordNotification extends Notification
         return (new MailMessage)
                     ->line('Olá, ' . $notifiable->name)
                     ->line('Clique no link abaixo para resetar sua senha!')
-                    ->action('Reset sua senha', url('/view?token=' . $this->token));
+                    ->action('Reset sua senha', url('/view?token=' . $this->token))
+                    ->line('token = ' . $this->token);
     }
 
     /**
