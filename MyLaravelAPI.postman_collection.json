@@ -323,6 +323,176 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "#12 - Toggle published",
+			"request": {
+				"url": "{{url}}/api/advertisements/2d5ee7fa-701f-11e7-b2f7-a45e60f15067/toggle-published",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#13 - Pesquisar Anúncios",
+			"request": {
+				"url": {
+					"raw": "{{url}}/api/advertisements/search?q=editado",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"advertisements",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "editado",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Titulo - editado\",\n\t\"description\": \"Descricao - editado\",\n\t\"tags\": \"tag1,tag2,tag3,tageditada\",\n\t\"price\": 101.00,\n\t\"price_unit\": \"BRL\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#14 -Criar imagem",
+			"request": {
+				"url": "{{url}}/api/advertisements/2d5ee7fa-701f-11e7-b2f7-a45e60f15067/pictures",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"description": "",
+							"type": "file",
+							"src": "HappyFace.jpg"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#15 -Deletar imagem",
+			"request": {
+				"url": "{{url}}/api/advertisements/2d5ee7fa-701f-11e7-b2f7-a45e60f15067/pictures/O2BbSoU6xbkEaeGGEMA6gknbcpjtuOITGcPtRocJ.jpeg",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#16 -Listar imagens",
+			"request": {
+				"url": "{{url}}/api/advertisements/2d5ee7fa-701f-11e7-b2f7-a45e60f15067/pictures",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
