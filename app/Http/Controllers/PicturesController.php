@@ -9,6 +9,7 @@ use App\Services\AdvertisementService;
 use App\Services\PictureService;
 use App\Transformers\PictureTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PicturesController extends Controller
 {
@@ -26,10 +27,29 @@ class PicturesController extends Controller
         try {
             $advertisement = $this->advertisementService->findByUuid($uuid);
 
-            $picture = $this->pictureService->create($advertisement, $request->file('file'));
+            return DB::transaction(function () use ($request, $advertisement) {
+                $picture = $this->pictureService->create($advertisement, $request->file('file'));
 
-            return JsonResponseHelper::successResponse('Imagem criada com sucesso',
-                fractal($picture, new PictureTransformer())->toArray());
+                return JsonResponseHelper::successResponse('Imagem criada com sucesso',
+                    fractal($picture, new PictureTransformer())->toArray(), 201);
+            });
+        } catch (ModelNotFoundException $e) {
+            return JsonResponseHelper::errorResponse($e->getMessage(), $e->getError(), $e->getCode());
+        }
+    }
+
+    public function delete(Request $request, $uuid, $fileName) {
+        try {
+            $advertisement = $this->advertisementService->findByUuid($uuid);
+
+            return DB::transaction(function () use ($advertisement, $fileName) {
+                $picture = $this->pictureService->findByFileName($advertisement, $fileName);
+
+                $this->pictureService->delete($picture);
+
+                return JsonResponseHelper::successResponse('Imagem deletada com sucesso',
+                    false, 200);
+            });
         } catch (ModelNotFoundException $e) {
             return JsonResponseHelper::errorResponse($e->getMessage(), $e->getError(), $e->getCode());
         }

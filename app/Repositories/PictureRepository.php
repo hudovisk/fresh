@@ -16,4 +16,14 @@ class PictureRepository
         return $picture;
     }
 
+    public function findByPath($path) {
+        $picture = Picture::where('path', 'like', $path)->first();
+
+        return $picture;
+    }
+
+    public function delete(Picture $picture) {
+        $picture->delete();
+    }
+
 }

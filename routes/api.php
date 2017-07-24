@@ -63,5 +63,6 @@ Route::group(['prefix' => '/advertisements/{uuid}/pictures'], function () {
     //authenticated
     Route::group(['middleware' => ['auth:api']], function () {
         Route::post('/', 'PicturesController@create');
+        Route::delete('/{file}', 'PicturesController@delete');
     });
 });

@@ -19,6 +19,6 @@ class Advertisement extends Model
     }
 
     public function getPicturesFolder() {
-        return '/ads/' . $this->uuid . '/pictures';
+        return 'ads/' . $this->uuid . '/pictures/';
     }
 }
