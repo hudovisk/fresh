@@ -49,4 +49,15 @@ class AdvertisementController extends Controller
         }
     }
 
+    public function show(Request $request, $uuid) {
+        try {
+            $advertisement = $this->advertisementService->findByUuid($uuid);
+
+            return JsonResponseHelper::successResponse('Anúncio encontrado com sucesso',
+                fractal($advertisement, new AdvertisementTransformer())->toArray(), 200);
+        } catch (ModelNotFoundException $e) {
+            return JsonResponseHelper::errorResponse($e->getMessage(), $e->getError(), $e->getCode());
+        }
+    }
+
 }
