@@ -23,6 +23,19 @@ class PicturesController extends Controller
         $this->advertisementService = $advertisementService;
     }
 
+    public function index(Request $request, $uuid) {
+        try {
+            $advertisement = $this->advertisementService->findByUuid($uuid);
+
+            $pictures = $advertisement->pictures;
+
+            return JsonResponseHelper::successResponse('Imagens encontradas com sucesso',
+                fractal($pictures, new PictureTransformer())->toArray());
+        } catch (ModelNotFoundException $e) {
+            return JsonResponseHelper::errorResponse($e->getMessage(), $e->getError(), $e->getCode());
+        }
+    }
+
     public function create(PictureCreateRequest $request, $uuid) {
         try {
             $advertisement = $this->advertisementService->findByUuid($uuid);
@@ -47,8 +60,7 @@ class PicturesController extends Controller
 
                 $this->pictureService->delete($picture);
 
-                return JsonResponseHelper::successResponse('Imagem deletada com sucesso',
-                    false, 200);
+                return JsonResponseHelper::successResponse('Imagem deletada com sucesso');
             });
         } catch (ModelNotFoundException $e) {
             return JsonResponseHelper::errorResponse($e->getMessage(), $e->getError(), $e->getCode());
