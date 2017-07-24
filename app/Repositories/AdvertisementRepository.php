@@ -19,6 +19,21 @@ class AdvertisementRepository
         return Advertisement::all();
     }
 
+    public function search(array $filters) {
+        //TODO(Hudo): Update to FULL TEXT search
+        $advertisements = Advertisement::where(function ($query) use ($filters) {
+            if (isset($filters['q'])) {
+               $q = $filters['q'];
+
+               $query->where('title', 'like', "%$q%")
+                     ->orWhere('description', 'like', "%$q%")
+                     ->orWhere('tags', 'like', "%$q%");
+            }
+        })->get();
+
+        return $advertisements;
+    }
+
     public function findByUuid($uuid) {
         $advertisement = Advertisement::where('uuid', $uuid)->first();
 

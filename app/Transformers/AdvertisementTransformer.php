@@ -20,7 +20,7 @@ class AdvertisementTransformer extends TransformerAbstract
             'title' => $advertisement->title,
             'cover' => null, //TODO(Hudo): Add cover after finished with images
             'price' => $advertisement->price,
-            'published' => $advertisement->publihsed_at,
+            'published' => $advertisement->published_at ? $advertisement->published_at->toDateTimeString() : null,
             'description' => $advertisement->description,
         ];
     }

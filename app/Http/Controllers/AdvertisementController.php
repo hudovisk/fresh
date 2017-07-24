@@ -79,4 +79,28 @@ class AdvertisementController extends Controller
         }
     }
 
+    public function togglePublished(Request $request, $uuid) {
+        try {
+            $advertisement = $this->advertisementService->findByUuid($uuid);
+
+            return DB::transaction(function () use ($advertisement) {
+
+                $advertisement = $this->advertisementService->togglePublished($advertisement);
+
+                return JsonResponseHelper::successResponse('Anúncio editado com sucesso',
+                    fractal($advertisement, new AdvertisementTransformer())->toArray());
+            });
+        } catch (ModelNotFoundException $e) {
+            return JsonResponseHelper::errorResponse($e->getMessage(), $e->getError(), $e->getCode());
+        }
+    }
+
+    public function search(Request $request) {
+        $filters = $request->only('q');
+        $advertisements = $this->advertisementService->search($filters);
+
+        return JsonResponseHelper::successResponse('Anúncios encontrados com sucesso',
+            fractal($advertisements, new AdvertisementTransformer())->toArray());
+    }
+
 }
