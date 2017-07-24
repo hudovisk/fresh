@@ -28,4 +28,10 @@ class UserRepository
         return $user;
     }
 
+    public function update(User $user, $data) {
+        $user->fill($data)->save();
+
+        return $user;
+    }
+
 }

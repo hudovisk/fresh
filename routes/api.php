@@ -27,7 +27,16 @@ Route::group([], function () {
     //authenticated
     Route::group(['middleware' => ['auth:api']], function () {
         Route::post('/register', 'AuthController@register');
-        Route::put('/me', 'AuthController@updateProfile');
     });
 });
+
+//UserController
+Route::group([], function () {
+
+    //authenticated
+    Route::group(['middleware' => ['auth:api']], function () {
+        Route::put('/me', 'UserController@updateProfile');
+    });
+});
+
 

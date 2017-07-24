@@ -31,4 +31,10 @@ class UserService
 
         return $user;
     }
+
+    public function update(User $user, array $data) {
+        $user = $this->userRepositry->update($user, $data);
+
+        return $user;
+    }
 }
