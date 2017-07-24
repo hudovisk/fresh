@@ -15,6 +15,10 @@ use Ramsey\Uuid\Uuid;
 class AdvertisementRepository
 {
 
+    public function fetchAll() {
+        return Advertisement::all();
+    }
+
     public function findByUuid($uuid) {
         $advertisement = Advertisement::where('uuid', $uuid)->first();
 
@@ -33,6 +37,10 @@ class AdvertisementRepository
         $advertisement->fill($data)->save();
 
         return $advertisement;
+    }
+
+    public function delete($advertisement) {
+        $advertisement->delete();
     }
 
 }

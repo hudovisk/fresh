@@ -21,6 +21,13 @@ class AdvertisementController extends Controller
         $this->advertisementService = $advertisementService;
     }
 
+    public function index(Request $request) {
+        $advertisements = $this->advertisementService->fetchAll();
+
+        return JsonResponseHelper::successResponse('Anúncios encontrados com sucesso',
+            fractal($advertisements, new AdvertisementTransformer())->toArray());
+    }
+
     public function create(AdvertisementCreateRequest $request) {
         return DB::transaction(function () use ($request) {
             $data = $request->all();
@@ -42,7 +49,7 @@ class AdvertisementController extends Controller
                 $advertisement = $this->advertisementService->edit($advertisement, $data);
 
                 return JsonResponseHelper::successResponse('Anúncio editado com sucesso',
-                    fractal($advertisement, new AdvertisementTransformer())->toArray(), 200);
+                    fractal($advertisement, new AdvertisementTransformer())->toArray());
             });
         } catch (ModelNotFoundException $e) {
             return JsonResponseHelper::errorResponse($e->getMessage(), $e->getError(), $e->getCode());
@@ -54,7 +61,19 @@ class AdvertisementController extends Controller
             $advertisement = $this->advertisementService->findByUuid($uuid);
 
             return JsonResponseHelper::successResponse('Anúncio encontrado com sucesso',
-                fractal($advertisement, new AdvertisementTransformer())->toArray(), 200);
+                fractal($advertisement, new AdvertisementTransformer())->toArray());
+        } catch (ModelNotFoundException $e) {
+            return JsonResponseHelper::errorResponse($e->getMessage(), $e->getError(), $e->getCode());
+        }
+    }
+
+    public function delete(Request $request, $uuid) {
+        try {
+            $advertisement = $this->advertisementService->findByUuid($uuid);
+
+            $this->advertisementService->delete($advertisement);
+
+            return JsonResponseHelper::successResponse('Anúncio deletado com sucesso');
         } catch (ModelNotFoundException $e) {
             return JsonResponseHelper::errorResponse($e->getMessage(), $e->getError(), $e->getCode());
         }

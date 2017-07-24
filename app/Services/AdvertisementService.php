@@ -23,6 +23,10 @@ class AdvertisementService
         $this->advertisementRepository = $advertisementRepository;
     }
 
+    public function fetchAll() {
+        return $this->advertisementRepository->fetchAll();
+    }
+
     public function findByUuid($uuid) {
         $advertisement = $this->advertisementRepository->findByUuid($uuid);
 
@@ -41,5 +45,9 @@ class AdvertisementService
         $advertisement = $this->advertisementRepository->edit($advertisement, $data);
 
         return $advertisement;
+    }
+
+    public function delete($advertisement) {
+        $this->advertisementRepository->delete($advertisement);
     }
 }
