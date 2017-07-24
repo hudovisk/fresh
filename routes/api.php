@@ -39,4 +39,11 @@ Route::group([], function () {
     });
 });
 
+//AdvertisementController
+Route::group(['prefix' => '/advertisements'], function () {
 
+    //authenticated
+    Route::group(['middleware' => ['auth:api']], function () {
+        Route::post('/', 'AdvertisementController@create');
+    });
+});

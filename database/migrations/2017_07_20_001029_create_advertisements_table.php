@@ -15,8 +15,14 @@ class CreateAdvertisementsTable extends Migration
     {
         Schema::create('advertisements', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->uuid('uuid');
             $table->string('title');
-            $table->string('message');
+            $table->string('description');
+            $table->string('tags');
+            $table->float('price');
+            $table->enum('price_unit', ['USD', 'BRL']);
+            $table->dateTime('published_at')->nullable();
 
             $table->timestamps();
         });
