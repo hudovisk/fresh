@@ -263,6 +263,66 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "#10 - Detalhar Anúncio",
+			"request": {
+				"url": "{{url}}/api/advertisements/2d5ee7fa-701f-11e7-b2f7-a45e60f15067",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Titulo - editado\",\n\t\"description\": \"Descricao - editado\",\n\t\"tags\": \"tag1,tag2,tag3,tageditada\",\n\t\"price\": 101.00,\n\t\"price_unit\": \"BRL\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#11 - Listar Anúncios ",
+			"request": {
+				"url": "{{url}}/api/advertisements/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Titulo - editado\",\n\t\"description\": \"Descricao - editado\",\n\t\"tags\": \"tag1,tag2,tag3,tageditada\",\n\t\"price\": 101.00,\n\t\"price_unit\": \"BRL\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
