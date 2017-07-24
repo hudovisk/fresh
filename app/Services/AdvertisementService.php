@@ -9,6 +9,8 @@
 namespace App\Services;
 
 
+use App\Exceptions\ModelNotFoundException;
+use App\Models\Advertisement;
 use App\Repositories\AdvertisementRepository;
 
 class AdvertisementService
@@ -21,10 +23,23 @@ class AdvertisementService
         $this->advertisementRepository = $advertisementRepository;
     }
 
+    public function findByUuid($uuid) {
+        $advertisement = $this->advertisementRepository->findByUuid($uuid);
+
+        if(!$advertisement) throw new ModelNotFoundException('Anúncio não encontrado');
+
+        return $advertisement;
+    }
+
     public function create(array $data) {
         $advertisement = $this->advertisementRepository->create($data);
 
         return $advertisement;
     }
 
+    public function edit(Advertisement $advertisement, array $data) {
+        $advertisement = $this->advertisementRepository->edit($advertisement, $data);
+
+        return $advertisement;
+    }
 }

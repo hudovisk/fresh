@@ -45,5 +45,6 @@ Route::group(['prefix' => '/advertisements'], function () {
     //authenticated
     Route::group(['middleware' => ['auth:api']], function () {
         Route::post('/', 'AdvertisementController@create');
+        Route::put('/{uuid}', 'AdvertisementController@edit');
     });
 });

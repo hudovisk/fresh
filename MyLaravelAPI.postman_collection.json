@@ -32,7 +32,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"QRnfJKnuQfB9sUpXHBLRCXlJhYdCwZ5QnTKOup9B\",\r\n    \"username\": \"admin@admin.com\",\r\n    \"password\": \"admin\",\r\n    \"scope\": \"*\"\r\n}"
+					"raw": "{\r\n\t\"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"kdGWrHHK7YMFQ3xzM9QTFqyzwdSSLEF7plzqKDFc\",\r\n    \"username\": \"admin@admin.com\",\r\n    \"password\": \"admin\",\r\n    \"scope\": \"*\"\r\n}"
 				},
 				"description": ""
 			},
@@ -168,7 +168,97 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"QRnfJKnuQfB9sUpXHBLRCXlJhYdCwZ5QnTKOup9B\",\r\n    \"username\": \"hudo2@hudo.com\",\r\n    \"password\": \"654321\",\r\n    \"scope\": \"*\"\r\n}"
+					"raw": "{\r\n\t\"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"kdGWrHHK7YMFQ3xzM9QTFqyzwdSSLEF7plzqKDFc\",\r\n    \"username\": \"hudo2@hudo.com\",\r\n    \"password\": \"654321\",\r\n    \"scope\": \"*\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#7 - Editar Perfil Usuário",
+			"request": {
+				"url": "{{url}}/api/me",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Hudo - Editado\",\n\t\"email\": \"hudo@hudo.com\",\n\t\"password\": \"123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#8 - Criar Anúncio",
+			"request": {
+				"url": "{{url}}/api/advertisements",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Titulo\",\n\t\"description\": \"Descricao\",\n\t\"tags\": \"tag1,tag2,tag3\",\n\t\"price\": 100.00,\n\t\"price_unit\": \"BRL\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "#9 - Editar Anúncio",
+			"request": {
+				"url": "{{url}}/api/advertisements/2d5ee7fa-701f-11e7-b2f7-a45e60f15067",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Titulo - editado\",\n\t\"description\": \"Descricao - editado\",\n\t\"tags\": \"tag1,tag2,tag3,tageditada\",\n\t\"price\": 101.00,\n\t\"price_unit\": \"BRL\"\n}"
 				},
 				"description": ""
 			},
