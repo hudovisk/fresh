@@ -13,4 +13,12 @@ class Advertisement extends Model
     protected $dates = [
         'published_at', 'created_at', 'modified_at',
     ];
+
+    public function pictures() {
+        return $this->hasMany(Picture::class);
+    }
+
+    public function getPicturesFolder() {
+        return '/ads/' . $this->uuid . '/pictures';
+    }
 }

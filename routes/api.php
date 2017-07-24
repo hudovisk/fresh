@@ -56,3 +56,12 @@ Route::group(['prefix' => '/advertisements'], function () {
         Route::post('/{uuid}/toggle-published', 'AdvertisementController@togglePublished');
     });
 });
+
+//PicturesController
+Route::group(['prefix' => '/advertisements/{uuid}/pictures'], function () {
+
+    //authenticated
+    Route::group(['middleware' => ['auth:api']], function () {
+        Route::post('/', 'PicturesController@create');
+    });
+});
