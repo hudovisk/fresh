@@ -24,12 +24,12 @@ class AdvertisementService
         $this->advertisementRepository = $advertisementRepository;
     }
 
-    public function fetchAll() {
-        return $this->advertisementRepository->fetchAll();
+    public function fetchAll($includes = []) {
+        return $this->advertisementRepository->fetchAll($includes);
     }
 
-    public function search(array $filters) {
-        return $this->advertisementRepository->search($filters);
+    public function search(array $filters, $includes = []) {
+        return $this->advertisementRepository->search($filters, $includes);
     }
 
     public function findByUuid($uuid) {

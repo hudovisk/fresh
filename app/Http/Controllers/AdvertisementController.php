@@ -22,10 +22,12 @@ class AdvertisementController extends Controller
     }
 
     public function index(Request $request) {
-        $advertisements = $this->advertisementService->fetchAll();
+        $advertisements = $this->advertisementService->fetchAll(['pictures']);
 
         return JsonResponseHelper::successResponse('Anúncios encontrados com sucesso',
-            fractal($advertisements, new AdvertisementTransformer())->toArray());
+            fractal($advertisements, new AdvertisementTransformer())
+                ->parseIncludes('cover')
+                ->toArray());
     }
 
     public function create(AdvertisementCreateRequest $request) {
@@ -61,7 +63,9 @@ class AdvertisementController extends Controller
             $advertisement = $this->advertisementService->findByUuid($uuid);
 
             return JsonResponseHelper::successResponse('Anúncio encontrado com sucesso',
-                fractal($advertisement, new AdvertisementTransformer())->toArray());
+                fractal($advertisement, new AdvertisementTransformer())
+                    ->parseIncludes(['cover', 'pictures'])
+                    ->toArray());
         } catch (ModelNotFoundException $e) {
             return JsonResponseHelper::errorResponse($e->getMessage(), $e->getError(), $e->getCode());
         }
@@ -97,10 +101,12 @@ class AdvertisementController extends Controller
 
     public function search(Request $request) {
         $filters = $request->only('q');
-        $advertisements = $this->advertisementService->search($filters);
+        $advertisements = $this->advertisementService->search($filters, ['pictures']);
 
         return JsonResponseHelper::successResponse('Anúncios encontrados com sucesso',
-            fractal($advertisements, new AdvertisementTransformer())->toArray());
+            fractal($advertisements, new AdvertisementTransformer())
+                ->parseIncludes('cover')
+                ->toArray());
     }
 
 }

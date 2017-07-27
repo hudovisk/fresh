@@ -16,12 +16,12 @@ use Ramsey\Uuid\Uuid;
 class AdvertisementRepository
 {
 
-    public function fetchAll() {
-        return Advertisement::all();
+    public function fetchAll($includes = []) {
+        return Advertisement::with($includes)->get();
     }
 
-    public function search(array $filters) {
-        $query = Advertisement::query();
+    public function search(array $filters, $includes = []) {
+        $query = Advertisement::with($includes)->query();
 
         if(isset($filters['q']) && $filters['q']) {
             $query = $query->selectRaw("*, MATCH (title,description,tags) AGAINST (?) as score", [$filters['q']])

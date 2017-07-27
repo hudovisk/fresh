@@ -21,4 +21,12 @@ class Advertisement extends Model
     public function getPicturesFolder() {
         return 'ads/' . $this->uuid . '/pictures/';
     }
+
+    public function getCoverAttribute() {
+        if(count($this->pictures) > 0) {
+            return $this->pictures[0];
+        } else {
+            return null;
+        }
+    }
 }
