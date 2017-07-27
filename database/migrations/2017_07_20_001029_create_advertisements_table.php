@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateAdvertisementsTable extends Migration
 {
@@ -26,6 +27,8 @@ class CreateAdvertisementsTable extends Migration
 
             $table->timestamps();
         });
+
+        DB::statement('ALTER TABLE advertisements ADD FULLTEXT search(title, description, tags)');
     }
 
     /**

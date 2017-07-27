@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 
 use App\Models\Advertisement;
+use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
 class AdvertisementRepository
@@ -20,18 +21,15 @@ class AdvertisementRepository
     }
 
     public function search(array $filters) {
-        //TODO(Hudo): Update to FULL TEXT search
-        $advertisements = Advertisement::where(function ($query) use ($filters) {
-            if (isset($filters['q'])) {
-               $q = $filters['q'];
+        $query = Advertisement::query();
 
-               $query->where('title', 'like', "%$q%")
-                     ->orWhere('description', 'like', "%$q%")
-                     ->orWhere('tags', 'like', "%$q%");
-            }
-        })->get();
+        if(isset($filters['q']) && $filters['q']) {
+            $query = $query->selectRaw("*, MATCH (title,description,tags) AGAINST (?) as score", [$filters['q']])
+                ->whereRaw("MATCH (title,description,tags) AGAINST (? IN BOOLEAN MODE)", [$filters['q']])
+                ->orderBy('score', 'desc');
+        }
 
-        return $advertisements;
+        return $query->get();
     }
 
     public function findByUuid($uuid) {
