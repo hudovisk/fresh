@@ -21,7 +21,7 @@ class AdvertisementRepository
     }
 
     public function search(array $filters, $includes = []) {
-        $query = Advertisement::with($includes)->query();
+        $query = Advertisement::with($includes);
 
         if(isset($filters['q']) && $filters['q']) {
             $query = $query->selectRaw("*, MATCH (title,description,tags) AGAINST (?) as score", [$filters['q']])
