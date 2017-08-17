@@ -1,0 +1,30 @@
+version: '3'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./.docker/laravel.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./:/opt/apps/laravel
+      - ./storage/logs/nginx:/var/log/nginx
+    links:
+      - app
+  app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./:/opt/apps/laravel
+    entrypoint: ./.docker/laravel-entrypoint.sh
+  database:
+    image: mysql:latest
+    volumes:
+      - ./storage/app/database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: 'fresh'
+      MYSQL_USER: 'root'
+      MYSQL_PASS: 'root'
+    ports:
+      - "3306:3306"
